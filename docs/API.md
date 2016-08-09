@@ -1034,7 +1034,7 @@ __Example__
 lambdaArn := minio.NewArn("minio", "lambda", "us-east-1", "1", "lambda")
 
 lambdaConfig := minio.NewNotificationConfig(lambdaArn)
-lambdaConfig.AddEvents(ObjectCreatedAll, ObjectRemovedAll)
+lambdaConfig.AddEvents(minio.ObjectCreatedAll, minio.ObjectRemovedAll)
 lambdaConfig.AddFilterPrefix("photos/")
 lambdaConfig.AddFilterSuffix(".jpg")
 
