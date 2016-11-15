@@ -111,6 +111,13 @@ func getReaderSize(reader io.Reader) (size int64, err error) {
 				return
 			}
 			size = st.Size()
+			// FileInfo.Size() returns:
+			//	length in bytes for regular files; system-dependent for others
+			// For other types like pipes it can return 0 instead.
+			// This is an ugly fix to make pipes work on linux systems.
+			if size == 0 {
+				size = -1
+			}
 		case *Object:
 			var st ObjectInfo
 			st, err = v.Stat()
